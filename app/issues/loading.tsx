@@ -25,10 +25,8 @@ const LoadingIssuesPage = () => {
             <Table.Row key={issue}>
               <Table.Cell>
                 <Skeleton />
-              </Table.Cell>
-              <Table.Cell>
                 {/* Show the status on mobile */}
-                <div className="block md:hidden">
+                <div className="block md:table-cell">
                   <Skeleton />
                 </div>
               </Table.Cell>
