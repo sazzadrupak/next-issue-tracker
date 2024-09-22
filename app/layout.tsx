@@ -6,7 +6,12 @@ import './globals.css';
 import './theme-config.css';
 
 import NavBar from './NavBar';
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter'
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
