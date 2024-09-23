@@ -45,7 +45,7 @@ const NavLinks = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  if (status === 'loading') return <Skeleton width="3rem" />;
+  if (status === 'loading') return <Skeleton width="3rem" height="1.75rem" />;
   if (status === 'unauthenticated') {
     return (
       <Link className="nav-link" href="/api/auth/signin">
@@ -80,7 +80,7 @@ const AuthStatus = () => {
 
 const NavBar = () => {
   return (
-    <nav className="border-b mb-5 px-5 py-3 h-15">
+    <nav className="border-b mb-5 px-5 py-3">
       <Container>
         <Flex justify="between">
           <Flex align="center" gap="3">
