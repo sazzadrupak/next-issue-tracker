@@ -7,17 +7,16 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 
-const AssigneeSelect = ({ issue }: { issue: Issue }) => {
-  const {
-    data: users,
-    error,
-    isLoading,
-  } = useQuery<User[], Error>({
+const useUser = () =>
+  useQuery<User[], Error>({
     queryKey: ['users'],
     queryFn: () => axios.get<User[]>('/api/users').then((res) => res.data),
     staleTime: 60 * 1000,
     retry: 3,
   });
+
+const AssigneeSelect = ({ issue }: { issue: Issue }) => {
+  const { data: users, error, isLoading } = useUser();
 
   const handleAssignUserToIssue = (userId: string) => {
     axios
