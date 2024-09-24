@@ -18,9 +18,10 @@ const IssuesPage = async ({ searchParams }: Props) => {
     : undefined;
   const where = { status };
 
+  const sort = searchParams.sort === 'asc' ? 'desc' : 'asc';
   const orderBy = columnNames.includes(searchParams.orderBy)
     ? {
-        [searchParams.orderBy]: 'asc',
+        [searchParams.orderBy]: sort,
       }
     : undefined;
 
@@ -39,7 +40,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
   return (
     <Flex direction="column" gap="3">
       <IssueActions />
-      <IssueTable searchParams={searchParams} issues={issues} />
+      <IssueTable searchParams={{ ...searchParams, sort }} issues={issues} />
       <Pagination
         pageSize={pageSize}
         currentPage={page}
