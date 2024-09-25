@@ -1,15 +1,9 @@
 import { IssueStatusBadge } from '@/app/components';
-import { Issue, Status } from '@prisma/client';
+import { IssueQuery } from '@/app/utils';
+import { Issue } from '@prisma/client';
 import { ArrowDownIcon, ArrowUpIcon } from '@radix-ui/react-icons';
 import { Table } from '@radix-ui/themes';
 import { default as Link, default as NextLink } from 'next/link';
-
-export interface IssueQuery {
-  status: Status;
-  orderBy: keyof Issue;
-  page: string;
-  sort: 'asc' | 'desc';
-}
 
 interface Props {
   searchParams: IssueQuery;
