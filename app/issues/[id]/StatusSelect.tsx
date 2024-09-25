@@ -5,27 +5,34 @@ import { Issue, Status } from '@prisma/client';
 import { Select } from '@radix-ui/themes';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 const StatusSelect = ({ issue }: { issue: Issue }) => {
+  const [selectedStatus, setSelectedStatus] = useState<Status>(issue.status);
   const router = useRouter();
-  const handleAssignStatusToIssue = async (status: Status) => {
+
+  useEffect(() => {
+    setSelectedStatus(issue.status);
+  }, [issue.status]);
+
+  const handleAssignStatus = async (status: Status) => {
+    const prevStatus = selectedStatus;
     try {
+      setSelectedStatus(status);
       await axios.patch(`/api/issues/${issue.id}`, {
         status,
       });
       router.refresh();
     } catch (error) {
+      setSelectedStatus(prevStatus);
       toast.error('Changes could not be saved');
     }
   };
 
   return (
     <>
-      <Select.Root
-        onValueChange={handleAssignStatusToIssue}
-        defaultValue={issue.status}
-      >
+      <Select.Root onValueChange={handleAssignStatus} value={selectedStatus}>
         <Select.Trigger placeholder="Status..." />
         <Select.Content>
           <Select.Group>
